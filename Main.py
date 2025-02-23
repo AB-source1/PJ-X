@@ -20,4 +20,4 @@ while x < d2 :
 outfile=open('./output.csv','w')
 writer=csv.writer(outfile)
 writer.writerow(["SNo", "States", "Dist", "Population"])
-
+writer.writerow([1, "cali", 200, 200000])
