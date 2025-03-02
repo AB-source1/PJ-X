@@ -14,10 +14,11 @@ def extract_dates(file_path):
             
             if key == "start_date":
                 start_date = value
-            
+                print("start date :",value)
             elif key == "end_date":
                 end_date = value
-            
+                print("End date :",value)
+
     if not start_date or not end_date:
         raise ValueError("Start Date or End Date not found in the CSV.")    # Attempt at error messaging to show info to user
     
@@ -25,7 +26,9 @@ def extract_dates(file_path):
 
 def generate_date_range(start_date, end_date):
     start = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    print("formated start date:",start)
     end = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    print("formated end date:",end)
     
     date_list = [(start + datetime.timedelta(days=i)).strftime("%Y-%m-%d")            #This I copied  
                  for i in range((end - start).days + 1)]
