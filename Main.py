@@ -13,10 +13,10 @@ def extract_dates(file_path):
             value = row[1].strip()
             
             if key == "start_date":
-                start_date = value
+                start_date = datetime.datetime.strptime(value, "%Y-%m-%d")
                 print("start date :",value)
             elif key == "end_date":
-                end_date = value
+                end_date  = datetime.datetime.strptime(value, "%Y-%m-%d")
                 print("End date :",value)
 
     if not start_date or not end_date:
@@ -25,13 +25,9 @@ def extract_dates(file_path):
     return start_date,end_date
 
 def generate_date_range(start_date, end_date):
-    start = datetime.datetime.strptime(start_date, "%Y-%m-%d")
-    print("formated start date:",start)
-    end = datetime.datetime.strptime(end_date, "%Y-%m-%d")
-    print("formated end date:",end)
     
-    date_list = [(start + datetime.timedelta(days=i)).strftime("%Y-%m-%d")            #This I copied  
-                 for i in range((end - start).days + 1)]
+    date_list = [(start_date + datetime.timedelta(days=i))            #This I copied  
+                 for i in range((end_date - start_date).days + 1)]
     print(date_list)
     
     return date_list
@@ -39,9 +35,17 @@ def generate_date_range(start_date, end_date):
 def write_csv(out_file, dates):
     with open(out_file,'w',newline = '') as file:
         writer = csv.writer(file)
-        writer.writerow(["Dates"])  # Header
+        writer.writerow(["Dates,Weekday"])  # Header
         for date in dates:
-            writer.writerow([date])
+            writer.writerow([date,is_weekday(date)])
+
+def is_weekday(date):
+    day = date.weekday()
+    if day > 4:
+        return False
+    else:
+        return True
+
 
 input_file = "./input.csv"
 output_file = "./output.csv"
