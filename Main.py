@@ -40,23 +40,19 @@ def write_csv(out_file, dates):
         for date in dates:
             writer.writerow([date])
 
+input_file = "./input.csv"
+output_file = "./output.csv"
 
-print(sys.argv)
-start_date = sys.argv[1]
-end_date = sys.argv[2]
-print("Start date :",start_date)
-print("End date :",end_date)
+try:
+    # Extract start and end dates
+    start_date, end_date = extract_dates(input_file)
+    print(f"Start Date: {start_date}, End Date: {end_date}")
+        
+    # Generate date range
+    date_list = generate_date_range(start_date, end_date)
 
-d1 = datetime.datetime.fromisoformat(start_date)
-print(d1)
-d2 = datetime.datetime.fromisoformat(end_date)
-x = d1
-while x < d2 :
-    print(x)
-    x = x + datetime.timedelta(days=1)
+    # Write output CSV
+    write_csv(output_file, date_list)
 
-
-outfile=open('./output.csv','w')
-writer=csv.writer(outfile)
-writer.writerow(["SNo", "States", "Dist", "Population"])
-writer.writerow([1, "cali", 200, 200000])
+except Exception as e: 
+    print("Error: {e}")  
