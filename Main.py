@@ -58,4 +58,4 @@ try:
     write_csv(output_file, date_list)
 
 except Exception as e: 
-    print("Error: {e}")  
+    print(f"Error: {e}")  
