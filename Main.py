@@ -40,11 +40,8 @@ def write_csv(out_file, dates):
             writer.writerow([date,is_weekday(date)])
 
 def is_weekday(date):
-    day = date.weekday()
-    if day > 4:
-        return False
-    else:
-        return True
+    return date.weekday() < 5
+ 
 
 
 input_file = "./input.csv"
