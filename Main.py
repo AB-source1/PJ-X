@@ -35,7 +35,7 @@ def generate_date_range(start_date, end_date):
 def write_csv(out_file, dates):
     with open(out_file,'w',newline = '') as file:
         writer = csv.writer(file)
-        writer.writerow(["Dates,Weekday"])  # Header
+        writer.writerow(["Dates","Weekday"])  # Header
         for date in dates:
             writer.writerow([date,is_weekday(date)])
 
