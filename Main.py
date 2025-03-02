@@ -19,9 +19,20 @@ def extract_dates(file_path):
                 end_date = value
             
     if not start_date or not end_date:
-    raise ValueError("Start Date or End Date not found in the CSV.")
+        raise ValueError("Start Date or End Date not found in the CSV.")
     
     return start_date,end_date
+
+def generate_date_range(start_date, end_date):
+    start = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    end = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    
+    date_list = [(start + datetime.timedelta(days=i)).strftime("%Y-%m-%d") 
+                 for i in range((end - start).days + 1)]
+    print(date_list)
+    
+    return date_list
+
 
 print(sys.argv)
 start_date = sys.argv[1]
