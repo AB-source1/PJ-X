@@ -37,7 +37,7 @@ def generate_date_range(start_date, end_date):
     return date_list
 
 def write_csv(out_file, dates):
-    with open(out_file,'w') as file:
+    with open(out_file,'w',newline = '') as file:
         writer = csv.writer(file)
         writer.writerow(["Dates"])  # Header
         for date in dates:
